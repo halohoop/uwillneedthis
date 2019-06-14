@@ -5,12 +5,12 @@ export PATH
 #=================================================
 #	System Required: CentOS 6+/Debian 6+/Ubuntu 14.04+
 #	Description: Install the ShadowsocksR server
-#	Version: 2.0.30
-#	Author: Toyo
-#	Blog: https://doub.io/ss-jc42/
+#	Version: 2.0.77
+#	Author: Halohoop
+#	Blog: http://halohoop.com/
 #=================================================
 
-sh_ver="2.0.30"
+sh_ver="2.0.77"
 filepath=$(cd "$(dirname "$0")"; pwd)
 file=$(echo -e "${filepath}"|awk -F "$0" '{print $1}')
 ssr_folder="/usr/local/shadowsocksr"
@@ -623,9 +623,9 @@ Service_SSR(){
 JQ_install(){
 	if [[ ! -e ${jq_file} ]]; then
 		if [[ ${bit} = "x86_64" ]]; then
-			wget --no-check-certificate "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64" -O ${jq_file}
+			wget --no-check-certificate "https://github.com/halohoop/jq/releases/download/jq-1.5/jq-linux64" -O ${jq_file}
 		else
-			wget --no-check-certificate "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux32" -O ${jq_file}
+			wget --no-check-certificate "https://github.com/halohoop/jq/releases/download/jq-1.5/jq-linux32" -O ${jq_file}
 		fi
 		[[ ! -e ${jq_file} ]] && echo -e "${Error} JQ解析器 下载失败，请检查 !" && exit 1
 		chmod +x ${jq_file}
@@ -711,7 +711,7 @@ Uninstall_SSR(){
 }
 Check_Libsodium_ver(){
 	echo -e "${Info} 开始获取 libsodium 最新版本..."
-	Libsodiumr_ver=`wget -qO- https://github.com/jedisct1/libsodium/releases/latest | grep "<title>" | sed -r 's/.*Release (.+) · jedisct1.*/\1/'`
+	Libsodiumr_ver=`wget -qO- https://github.com/halohoop/libsodium/releases/latest | grep "<title>" | sed -r 's/.*Release (.+) · jedisct1.*/\1/'`
 	[[ -z ${Libsodiumr_ver} ]] && Libsodiumr_ver=${Libsodiumr_ver_backup}
 	echo -e "${Info} libsodium 最新版本为 ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
 }
@@ -722,14 +722,14 @@ Install_Libsodium(){
 	if [[ ${release} == "centos" ]]; then
 		yum update
 		yum -y groupinstall "Development Tools"
-		wget  --no-check-certificate -N https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz
+		wget  --no-check-certificate -N https://github.com/halohoop/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		./configure --disable-maintainer-mode && make -j2 && make install
 		echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	else
 		apt-get update
 		apt-get install -y build-essential
-		wget  --no-check-certificate -N https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz
+		wget  --no-check-certificate -N https://github.com/halohoop/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		./configure --disable-maintainer-mode && make -j2 && make install
 	fi
@@ -1240,7 +1240,7 @@ Configure_LotServer(){
 Install_LotServer(){
 	[[ -e ${LotServer_file} ]] && echo -e "${Error} LotServer 已安装 !" && exit 1
 	#Github: https://github.com/0oVicero0/serverSpeeder_Install
-	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh"
+	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/halohoop/serverSpeeder_Install/master/appex.sh"
 	[[ ! -e "/tmp/appex.sh" ]] && echo -e "${Error} LotServer 安装脚本下载失败 !" && exit 1
 	bash /tmp/appex.sh 'install'
 	sleep 2s
@@ -1256,7 +1256,7 @@ Uninstall_LotServer(){
 	stty erase '^H' && read -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
-		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
+		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/halohoop/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
 		echo && echo "LotServer 卸载完成 !" && echo
 	fi
 }
