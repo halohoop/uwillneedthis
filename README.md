@@ -2,6 +2,14 @@
 uwillneedthis 是一个资源汇总的仓库，名字有 U will need this 这几个单词组成。
 资源均来自互联网和自己收集，希望能够帮到大家。
 
+## 酸酸不是乳
+```
+wget -N --no-check-certificate https://raw.githubusercontent.com/halohoop/uwillneedthis/master/ssr.sh  && chmod +x ssr.sh && bash ssr.sh
+wget --no-check-certificate https://github.com/halohoop/uwillneedthis/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+```
+收集了几个没有被咔嚓的国外便宜的湖务器，欢迎交流：wechat：halohoop
+
+
 ## 国内开源镜像站点
 * 公司类
   * 搜狐开源镜像站：http://mirrors.sohu.com/
